@@ -1,5 +1,85 @@
 {
+  // Default: none
+  // Inherits Astro's strict TypeScript configuration
   "extends": "astro/tsconfigs/strict",
-  "include": [".astro/types.d.ts", "**/*"],
-  "exclude": ["dist"]
+
+  "compilerOptions": {
+    // Default: undefined
+    // Makes imports relative to tsconfig.json location
+    "baseUrl": ".",
+
+    // Default: undefined
+    // Enables import aliases, maps @/* to src/* directory
+    "paths": {
+      "@/*": ["src/*"]
+    },
+
+    // Default: "ES3"
+    // Sets JavaScript language version for emitted code
+    "target": "ESNext",
+
+    // Default: Based on target
+    // Sets module system for emitted code
+    "module": "ESNext",
+
+    // Default: "Node"
+    // Modern module resolution strategy optimized for bundlers
+    "moduleResolution": "Bundler",
+
+    // Default: false
+    // Allows JavaScript files to be imported
+    "allowJs": true,
+
+    // Default: false
+    // Skips type checking of declaration files for better performance
+    "skipLibCheck": true,
+
+    // Default: false
+    // Enables all strict type checking options
+    "strict": true,
+
+    // Default: false
+    // Adds undefined to indexed access like arr[0] and obj['prop']
+    "noUncheckedIndexedAccess": true,
+
+    // Default: false
+    // Ensures consistent casing in imports across OS
+    "forceConsistentCasingInFileNames": true,
+
+    // Default: false
+    // Prevents TypeScript from generating output files
+    "noEmit": true,
+
+    // Default: false
+    // Allows importing JSON files as modules
+    "resolveJsonModule": true,
+
+    // Default: false
+    // Ensures code works with single-file transpilers like esbuild
+    "isolatedModules": true,
+
+    // Default: false
+    // Saves .tsbuildinfo file to speed up subsequent builds
+    "incremental": true,
+
+    // Default: undefined
+    // How to handle JSX syntax
+    "jsx": "preserve",
+
+    // Default: []
+    // TypeScript language service plugins
+    "plugins": [
+      {
+        "name": "@astrojs/ts-plugin"
+      }
+    ]
+  },
+
+  // Default: all TS files
+  // Specifies which files to include in compilation
+  "include": [".astro/types.d.ts", "src/**/*"],
+
+  // Default: node_modules,bower_components
+  // Specifies which files to exclude
+  "exclude": ["dist", "node_modules"]
 }
