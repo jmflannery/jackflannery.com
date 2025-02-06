@@ -1,11 +1,173 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Layout from '@/layouts/Layout.astro';
+import links from '@/links.ts';
+import {marked} from 'marked';
+import SocialismIcon from '@/assets/socialism.svg';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+let profile;
+let bio;
+
+try {
+  const res = await fetch('https://api.jackflannery.com');
+
+  if (!res.ok) {
+    throw new Error('failed to fetch profile');
+  }
+
+  profile = await res.json();
+  bio = marked.parse(profile?.bio || '');
+} catch (error) {
+  profile = {name: 'Name', title: 'Title'};
+  bio = '<p>Bio Unavailable.</p>';
+  console.error(error);
+}
 ---
 
-<Layout>
-	<Welcome />
+<Layout bodyClasses={'coolio'}>
+  <main class="max-md">
+    <div class="header flex flex-col md:flex-row-reverse items-center">
+      <div class="flex justify-center flex-grow">
+        <div class="inline-block text-center text-white leading-tight">
+          <h1>{profile.name}</h1>
+          <h2>{profile.title}</h2>
+        </div>
+      </div>
+      <img
+        src="https://jacksassets.nyc3.digitaloceanspaces.com/me_with_palm_trees.sm.webp"
+        class="w-auto h-auto"
+      />
+    </div>
+    <div class="links flex flex-wrap justify-center items-center">
+      {
+        links.map(({href, name, Component}) => (
+          <a
+            href={href}
+            class="flex flex-col justify-center items-center gap-1 md:gap-2"
+            target={href.startsWith('http') ? '_blank' : '_self'}
+          >
+            <Component />
+            <span>{name}</span>
+          </a>
+        ))
+      }
+    </div>
+    <div class="bio prose" set:html={bio} />
+    <div class="footer flex justify-center items-center">
+      <SocialismIcon />
+    </div>
+  </main>
 </Layout>
+
+<style>
+  :root {
+    --h1-font-size: 1.7rem;
+    --h2-font-size: 1.2rem;
+    --link-size: 6rem;
+    --link-font-size: 1rem;
+    --icon-size: calc(var(--link-size) * 0.6);
+    --footer-icon-width: 192px;
+  }
+
+  .header {
+    margin: var(--page-padding);
+    gap: var(--page-padding);
+  }
+
+  .header h1,
+  .header h2 {
+    text-shadow: #93c5fd 1px 0 10px;
+  }
+
+  .header h1 {
+    font-family: var(--font-display);
+    font-size: var(--h1-font-size);
+    letter-spacing: 1.8px;
+  }
+
+  .header h2 {
+    font-family: var(--font-script);
+    font-size: var(--h2-font-size);
+    transform: rotate(-2.8deg);
+  }
+
+  img {
+    box-shadow: 0px 0px 10px 0px #93c5fd;
+    border-radius: 50%;
+    width: 202px;
+    height: 202px;
+    margin: 0 auto;
+  }
+
+  svg {
+    fill: white;
+  }
+
+  .links {
+    /* padding: var(--page-padding) 0; */
+    margin: var(--page-padding);
+    gap: 8px;
+  }
+
+  .links a {
+    width: var(--link-size);
+    height: var(--link-size);
+    font-family: var(--font-mono);
+    font-size: var(--link-font-size);
+    color: white;
+    border-radius: 14px;
+  }
+
+  .links a:hover {
+    background-color: rgba(0, 0, 0, 0.46);
+  }
+
+  .links svg {
+    width: var(--icon-size);
+    height: var(--icon-size);
+  }
+
+  .bio {
+    background-color: rgba(10, 10, 10, 0.5);
+    padding: var(--page-padding);
+    margin: var(--page-padding);
+    border-radius: 14px;
+    color: #fafaf9;
+  }
+
+  .footer svg {
+    width: var(--footer-icon-width);
+  }
+
+  @media (min-width: 640px) {
+    :root {
+      --h1-font-size: 1.8rem;
+      --h2-font-size: 1.3rem;
+      --link-size: 7.2rem;
+      --footer-icon-width: 212px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    :root {
+      --h1-font-size: 2.2rem;
+      --h2-font-size: 1.5rem;
+      --link-size: 8.6rem;
+      --link-font-size: 1.25rem;
+      --footer-icon-width: 232px;
+    }
+
+    img {
+      width: 224px;
+      height: 224px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    :root {
+      --h1-font-size: 2.5rem;
+      --h2-font-size: 1.7rem;
+      --link-size: 9.2rem;
+      --footer-icon-width: 242px;
+    }
+  }
+</style>

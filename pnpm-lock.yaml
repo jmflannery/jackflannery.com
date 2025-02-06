@@ -11,9 +11,30 @@ importers:
       '@astrojs/tailwind':
         specifier: ^5.1.5
         version: 5.1.5(astro@5.1.10(jiti@1.21.7)(rollup@4.32.0)(typescript@5.7.3)(yaml@2.7.0))(tailwindcss@3.4.17)
+      '@fontsource-variable/source-sans-3':
+        specifier: ^5.1.1
+        version: 5.1.1
+      '@fontsource-variable/source-serif-4':
+        specifier: ^5.1.1
+        version: 5.1.1
+      '@fontsource/fira-mono':
+        specifier: ^5.1.1
+        version: 5.1.1
+      '@fontsource/marck-script':
+        specifier: ^5.1.1
+        version: 5.1.1
+      '@fontsource/rubik-mono-one':
+        specifier: ^5.1.1
+        version: 5.1.1
+      '@fontsource/source-sans-3':
+        specifier: ^5.1.1
+        version: 5.1.1
       astro:
         specifier: ^5.1.10
         version: 5.1.10(jiti@1.21.7)(rollup@4.32.0)(typescript@5.7.3)(yaml@2.7.0)
+      marked:
+        specifier: ^15.0.6
+        version: 15.0.6
       tailwindcss:
         specifier: ^3.4.17
         version: 3.4.17
@@ -216,6 +237,24 @@ packages:
     engines: {node: '>=18'}
     cpu: [x64]
     os: [win32]
+
+  '@fontsource-variable/source-sans-3@5.1.1':
+    resolution: {integrity: sha512-R3Ydrt+cV+u2IYczW4DUWTXE7nflIK3Qgu6Mb1cCSXBl52qDs88eZCrIEcAIRSc1v7ZLcEXeCmNLX5Oq4dcqjQ==}
+
+  '@fontsource-variable/source-serif-4@5.1.1':
+    resolution: {integrity: sha512-0ukcJ9U+Ravi38mwwUs3xyd8YdArMBz9cCtK8v6rRMO7Q6myJW1vzz0SLAI3Z6/pzcqsqIYo1ImUqKmOrw4cVw==}
+
+  '@fontsource/fira-mono@5.1.1':
+    resolution: {integrity: sha512-JDZUQuQQFTvPJgwOftXg44LOa7XYNqwTHHquEpi8rY6SK8m7Q5rWxmMX7nUOvRF2g+jc02mqmK2Y+WmviF9+VQ==}
+
+  '@fontsource/marck-script@5.1.1':
+    resolution: {integrity: sha512-7k8uQLI666u7l7hrPUX6e0AZNDUHyRmdm9ySn9SOkSBScqdGyOOZUx2OPfciDNjYf0xPUiK4LtvJa3hIT12X2A==}
+
+  '@fontsource/rubik-mono-one@5.1.1':
+    resolution: {integrity: sha512-hxb1XTJI/T2c9yAOOrjM7CD35N4lqPLDJ5hVZ4UFl62hCF6PEADwaIyt3T47kR51cnheKcKmYYAEoSVQg09Ubg==}
+
+  '@fontsource/source-sans-3@5.1.1':
+    resolution: {integrity: sha512-WVSo2dfrhPhcrWMeSMFdwhp7afUi/3uaRHwYxKZR524rx2RtcT0vpUbftQ0SmZ0vHSqcYhS5HNnVASw9clh0sA==}
 
   '@img/sharp-darwin-arm64@0.33.5':
     resolution: {integrity: sha512-UT4p+iz/2H4twwAoLCqfA9UH5pI6DggwKEGuaPy7nCVQ8ZsiY5PIcrRvD1DzuY3qYL07NtIQcWnBSY/heikIFQ==}
@@ -1020,6 +1059,11 @@ packages:
 
   markdown-table@3.0.4:
     resolution: {integrity: sha512-wiYz4+JrLyb/DqW2hkFJxP7Vd7JuTDm77fvbM8VfEQdmSMqcImWeeRbHwZjBjIFki/VaMK2BhFi7oUUZeM5bqw==}
+
+  marked@15.0.6:
+    resolution: {integrity: sha512-Y07CUOE+HQXbVDCGl3LXggqJDbXDP2pArc2C1N1RRMN0ONiShoSsIInMd5Gsxupe7fKLpgimTV+HOJ9r7bA+pg==}
+    engines: {node: '>= 18'}
+    hasBin: true
 
   mdast-util-definitions@6.0.0:
     resolution: {integrity: sha512-scTllyX6pnYNZH/AIp/0ePz6s4cZtARxImwoPJ7kS42n+MnVsI4XbnG6d4ibehRIldYMWM2LD7ImQblVhUejVQ==}
@@ -1948,6 +1992,18 @@ snapshots:
   '@esbuild/win32-x64@0.24.2':
     optional: true
 
+  '@fontsource-variable/source-sans-3@5.1.1': {}
+
+  '@fontsource-variable/source-serif-4@5.1.1': {}
+
+  '@fontsource/fira-mono@5.1.1': {}
+
+  '@fontsource/marck-script@5.1.1': {}
+
+  '@fontsource/rubik-mono-one@5.1.1': {}
+
+  '@fontsource/source-sans-3@5.1.1': {}
+
   '@img/sharp-darwin-arm64@0.33.5':
     optionalDependencies:
       '@img/sharp-libvips-darwin-arm64': 1.0.4
@@ -2808,6 +2864,8 @@ snapshots:
       source-map-js: 1.2.1
 
   markdown-table@3.0.4: {}
+
+  marked@15.0.6: {}
 
   mdast-util-definitions@6.0.0:
     dependencies:

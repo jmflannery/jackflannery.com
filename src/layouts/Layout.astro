@@ -1,22 +1,191 @@
+---
+import '@fontsource-variable/source-sans-3';
+import '@fontsource/source-sans-3/400.css';
+// import '@fontsource-variable/source-sans-3/wght-italic.css';
+import '@fontsource-variable/source-serif-4';
+// import '@fontsource-variable/source-serif-3/wght-italic.css';
+import '@fontsource/fira-mono';
+import '@fontsource/rubik-mono-one';
+import '@fontsource/marck-script';
+
+import Head from '@/components/Head.astro';
+
+const {bodyClasses} = Astro.props;
+---
+
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="generator" content={Astro.generator} />
-    <title>jackflannery.com</title>
-  </head>
-  <body>
+  <Head />
+  <body class:list={bodyClasses}>
     <slot />
   </body>
 </html>
 
-<style>
-  html,
+<style is:global>
+  :root {
+    --screen-xs: 375px;
+    --screen-sm: 640px;
+    --screen-md: 768px;
+    --screen-lg: 1024px;
+    --screen-xl: 1280px;
+    --screen-2xl: 1536px;
+    --screen-3xl: 1920px;
+
+    --font-sans: 'Source Sans 3 Variable', 'ui-sans-serif', 'system-ui',
+      'sans-serif';
+    --font-serif: 'Source Serif 4 Variable', 'ui-serif', 'Georgia', 'serif';
+    --font-mono: 'Fira Mono', 'ui-monospace', 'Cascadia Mono', 'Segoe UI Mono',
+      'Menlo', 'monospace';
+    --font-display: 'Rubik Mono One', 'ui-sans-serif', 'system-ui', 'sans-serif';
+    --font-script: 'Marck Script', 'cursive';
+
+    --page-padding: 0.5rem;
+    --margin-x: 0.5rem;
+    --margin-y: 2rem;
+  }
+
+  html {
+    font-size: 100%;
+  }
+
   body {
+    display: flow-root;
+    width: 100vw;
+    min-height: 100dvh;
     margin: 0;
-    width: 100%;
-    height: 100%;
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    font-weight: 400;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-primary);
+    font-weight: 700;
+  }
+
+  h1 {
+    font-size: 3rem; /* 48px */
+  }
+
+  h2 {
+    font-size: 2.25rem; /* 36px */
+  }
+
+  h3 {
+    font-size: 1.75rem; /* 28px */
+  }
+
+  h4 {
+    font-size: 1.5rem; /* 24px */
+  }
+
+  h5 {
+    font-size: 1.25rem; /* 20px - same as body */
+  }
+
+  h6 {
+    font-size: 1rem; /* 16px */
+  }
+
+  strong {
+    font-weight: bold;
+  }
+
+  b {
+    font-weight: bold;
+  }
+
+  em {
+    font-style: italic;
+  }
+
+  i {
+    font-style: italic;
+  }
+
+  main {
+    margin: var(--margin-y) auto;
+  }
+
+  .super-heading {
+    font-family: var(--font-display);
+  }
+
+  .coolio {
+    background: linear-gradient(#210cac, #3b82f6);
+  }
+
+  .max-sm {
+    max-width: calc(var(--screen-sm) + var(--page-padding) * 2);
+  }
+
+  .max-md {
+    max-width: calc(var(--screen-md) + var(--page-padding) * 2);
+  }
+
+  .max-lg {
+    max-width: calc(var(--screen-lg) + var(--page-padding) * 2);
+  }
+
+  .max-xl {
+    max-width: calc(var(--screen-xl) + var(--page-padding) * 2);
+  }
+
+  .max-2xl {
+    max-width: calc(var(--screen-2xl) + var(--page-padding) * 2);
+  }
+
+  .max-3xl {
+    max-width: calc(var(--screen-3xl) + var(--page-padding) * 2);
+  }
+
+  .prose {
+    font-size: 1.25rem;
+  }
+
+  .prose p {
+    margin-bottom: 1.25rem;
+  }
+
+  .prose p:last-child {
+    margin-bottom: 0;
+  }
+
+  @media (min-width: 640px) {
+    :root {
+      --page-padding: 1rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    :root {
+      --page-padding: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    :root {
+      --page-padding: 2rem;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    :root {
+    }
+  }
+
+  @media (min-width: 1536px) {
+    :root {
+    }
+  }
+
+  @media (min-width: 1920px) {
+    :root {
+    }
   }
 </style>
