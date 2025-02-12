@@ -1,0 +1,55 @@
+---
+import {
+  format,
+  isToday,
+  isYesterday,
+  isThisWeek,
+  differenceInDays,
+  parseISO,
+} from 'date-fns';
+
+interface Props {
+  date: string;
+}
+
+const formatDate = (date: Date) => {
+  if (isToday(date)) {
+    return 'Today';
+  } else if (isYesterday(date)) {
+    return 'Yesterday';
+  } else if (isThisWeek(date)) {
+    return format(date, 'EEEE'); // Full day name
+  } else if (differenceInDays(new Date(), date) >= 7) {
+    return format(date, 'MMMM d, yyyy'); // e.g., "June 12, 2024"
+  } else {
+    return format(date, 'MMMM d'); // e.g., "June 12"
+  }
+};
+
+const {date} = Astro.props as Props;
+
+const formattedDate = date ? formatDate(parseISO(date)) : null;
+---
+
+{
+  formattedDate && (
+    <p>
+      <span>🌹</span>
+      <time datetime={date}>{formattedDate}</time>
+    </p>
+  )
+}
+
+<style>
+  p {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 6px;
+  }
+
+  time {
+    font-family: var(--font-sans);
+    font-weight: 300;
+  }
+</style>

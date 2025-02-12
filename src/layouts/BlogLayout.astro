@@ -1,0 +1,81 @@
+---
+import CodeAndCoffee from '@/assets/code-and-coffee.svg';
+---
+
+<header>
+  <a href="/">
+    <img
+      src="https://jacksassets.nyc3.digitaloceanspaces.com/me_with_palm_trees.sm.webp"
+    />
+  </a>
+  <a href="/blog" class="title">
+    <span>Jack&#39;s</span>
+    <span>Weblog</span>
+  </a>
+  <a href="/blog">
+    <CodeAndCoffee />
+  </a>
+</header>
+<main class="max-md">
+  <slot />
+</main>
+
+<style>
+  :root {
+    --title-font-size: 2rem;
+    --profile-img-size: 64px;
+  }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: var(--margin-y) var(--margin-x);
+  }
+
+  header img {
+    width: var(--profile-img-size);
+    height: var(--profile-img-size);
+    border-radius: 50%;
+  }
+
+  header svg {
+    width: var(--profile-img-size);
+    height: var(--profile-img-size);
+    fill: var(--color-rose-500);
+  }
+
+  .title {
+    font-family: var(--font-script);
+    font-size: var(--title-font-size);
+    color: var(--color-blue-500);
+    transform: rotate(-8deg);
+  }
+
+  .title span:last-child {
+    color: var(--color-rose-500);
+    text-decoration: underline;
+    margin-left: -10px;
+  }
+
+  @media (min-width: 640px) {
+    :root {
+      --title-font-size: 2.5rem;
+      --profile-img-size: 92px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    :root {
+      --title-font-size: 3rem;
+      --profile-img-size: 112px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    :root {
+      --title-font-size: 3.375rem;
+      --profile-img-size: 132px;
+    }
+  }
+</style>

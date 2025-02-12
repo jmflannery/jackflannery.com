@@ -1,0 +1,16 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import BlogLayout from '@/layouts/BlogLayout.astro';
+import PostListItem from '@/components/PostListItem.astro';
+import {fetchPosts} from '@/api/posts.ts';
+
+const posts = await fetchPosts();
+---
+
+<Layout>
+  <BlogLayout>
+    <ul>
+      {posts.map((post: any) => <PostListItem post={post} />)}
+    </ul>
+  </BlogLayout>
+</Layout>

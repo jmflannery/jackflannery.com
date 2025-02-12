@@ -3,40 +3,25 @@ import Layout from '@/layouts/Layout.astro';
 import links from '@/links.ts';
 import {marked} from 'marked';
 import SocialismIcon from '@/assets/socialism.svg';
+import {fetchProfile} from '@/api/posts';
 
-let profile;
-let bio;
-
-try {
-  const res = await fetch('https://api.jackflannery.com');
-
-  if (!res.ok) {
-    throw new Error('failed to fetch profile');
-  }
-
-  profile = await res.json();
-  bio = marked.parse(profile?.bio || '');
-} catch (error) {
-  profile = {name: 'Name', title: 'Title'};
-  bio = '<p>Bio Unavailable.</p>';
-  console.error(error);
-}
+const profile = await fetchProfile();
 ---
 
 <Layout bodyClasses={'coolio'}>
-  <main class="max-md">
-    <div class="header flex flex-col md:flex-row-reverse items-center">
-      <div class="flex justify-center flex-grow">
-        <div class="inline-block text-center text-white leading-tight">
-          <h1>{profile.name}</h1>
-          <h2>{profile.title}</h2>
-        </div>
+  <header class="max-md">
+    <div class="flex justify-center flex-grow">
+      <div class="inline-block text-center text-white leading-tight">
+        <h1>{profile.name}</h1>
+        <h2>{profile.title}</h2>
       </div>
-      <img
-        src="https://jacksassets.nyc3.digitaloceanspaces.com/me_with_palm_trees.sm.webp"
-        class="w-auto h-auto"
-      />
     </div>
+    <img
+      src="https://jacksassets.nyc3.digitaloceanspaces.com/me_with_palm_trees.sm.webp"
+      class="w-auto h-auto"
+    />
+  </header>
+  <main class="max-md">
     <div class="links flex flex-wrap justify-center items-center">
       {
         links.map(({href, name, Component}) => (
@@ -51,7 +36,7 @@ try {
         ))
       }
     </div>
-    <div class="bio prose" set:html={bio} />
+    <div class="bio prose" set:html={marked.parse(profile?.bio)} />
     <div class="footer flex justify-center items-center">
       <SocialismIcon />
     </div>
@@ -68,23 +53,27 @@ try {
     --footer-icon-width: 192px;
   }
 
-  .header {
-    margin: var(--page-padding);
-    gap: var(--page-padding);
+  header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--margin-x);
+    align-items: center;
+    padding: 0 var(--margin-x);
+    margin: var(--margin-y) auto;
   }
 
-  .header h1,
-  .header h2 {
+  header h1,
+  header h2 {
     text-shadow: #93c5fd 1px 0 10px;
   }
 
-  .header h1 {
+  header h1 {
     font-family: var(--font-display);
     font-size: var(--h1-font-size);
     letter-spacing: 1.8px;
   }
 
-  .header h2 {
+  header h2 {
     font-family: var(--font-script);
     font-size: var(--h2-font-size);
     transform: rotate(-2.8deg);
@@ -103,8 +92,7 @@ try {
   }
 
   .links {
-    /* padding: var(--page-padding) 0; */
-    margin: var(--page-padding);
+    margin: var(--margin-y) 0;
     gap: 8px;
   }
 
@@ -129,7 +117,7 @@ try {
   .bio {
     background-color: rgba(10, 10, 10, 0.5);
     padding: var(--page-padding);
-    margin: var(--page-padding);
+    margin: var(--margin-y) 0;
     border-radius: 14px;
     color: #fafaf9;
   }
@@ -154,6 +142,10 @@ try {
       --link-size: 8.6rem;
       --link-font-size: 1.25rem;
       --footer-icon-width: 232px;
+    }
+
+    header {
+      flex-direction: row-reverse;
     }
 
     img {

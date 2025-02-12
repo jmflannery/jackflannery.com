@@ -42,6 +42,17 @@ const {bodyClasses} = Astro.props;
     --page-padding: 0.5rem;
     --margin-x: 0.5rem;
     --margin-y: 2rem;
+
+    --color-my-blue: #210cac;
+    --color-cyan-400: #22d3ee;
+    --color-blue-500: #3b82f6;
+    --color-slate-400: #a8a29e;
+    --color-rose-500: #f43f5e;
+
+    --heading-line-height: 1.2;
+
+    --h1-font-size: 1.75rem;
+    --h2-font-size: 1.375rem;
   }
 
   html {
@@ -64,16 +75,19 @@ const {bodyClasses} = Astro.props;
   h4,
   h5,
   h6 {
-    font-family: var(--font-primary);
+    font-family: var(--font-sans);
     font-weight: 700;
+    line-height: var(--heading-line-height);
   }
 
   h1 {
-    font-size: 3rem; /* 48px */
+    font-size: var(--h1-font-size);
+    text-align: center;
+    /* font-size: 3rem; 48px */
   }
 
   h2 {
-    font-size: 2.25rem; /* 36px */
+    font-size: var(--h2-font-size);
   }
 
   h3 {
@@ -90,6 +104,10 @@ const {bodyClasses} = Astro.props;
 
   h6 {
     font-size: 1rem; /* 16px */
+  }
+
+  p {
+    line-height: 1.6;
   }
 
   strong {
@@ -109,7 +127,35 @@ const {bodyClasses} = Astro.props;
   }
 
   main {
+    padding: 0 var(--margin-x);
     margin: var(--margin-y) auto;
+  }
+
+  li {
+    list-style: none;
+  }
+
+  pre {
+    background-color: rgb(249, 249, 249);
+    border: 1px solid rgb(229, 229, 229);
+    border-radius: 4px;
+    padding: 32px;
+    margin-top: 28px;
+    overflow: scroll;
+  }
+
+  code {
+    background-color: rgb(249, 249, 249);
+    font-family: var(--font-mono);
+    font-size: 16px;
+    border: 1px solid rgb(229, 229, 229);
+    border-radius: 4px;
+    padding: 2px 4px;
+  }
+
+  pre > code {
+    padding: 0;
+    border: none;
   }
 
   .super-heading {
@@ -117,31 +163,31 @@ const {bodyClasses} = Astro.props;
   }
 
   .coolio {
-    background: linear-gradient(#210cac, #3b82f6);
+    background: linear-gradient(var(--color-my-blue), var(--color-cyan-400));
   }
 
   .max-sm {
-    max-width: calc(var(--screen-sm) + var(--page-padding) * 2);
+    max-width: calc(var(--screen-sm) + var(--margin-x) * 2);
   }
 
   .max-md {
-    max-width: calc(var(--screen-md) + var(--page-padding) * 2);
+    max-width: calc(var(--screen-md) + var(--margin-x) * 2);
   }
 
   .max-lg {
-    max-width: calc(var(--screen-lg) + var(--page-padding) * 2);
+    max-width: calc(var(--screen-lg) + var(--margin-x) * 2);
   }
 
   .max-xl {
-    max-width: calc(var(--screen-xl) + var(--page-padding) * 2);
+    max-width: calc(var(--screen-xl) + var(--margin-x) * 2);
   }
 
   .max-2xl {
-    max-width: calc(var(--screen-2xl) + var(--page-padding) * 2);
+    max-width: calc(var(--screen-2xl) + var(--margin-x) * 2);
   }
 
   .max-3xl {
-    max-width: calc(var(--screen-3xl) + var(--page-padding) * 2);
+    max-width: calc(var(--screen-3xl) + var(--margin-x) * 2);
   }
 
   .prose {
@@ -159,18 +205,25 @@ const {bodyClasses} = Astro.props;
   @media (min-width: 640px) {
     :root {
       --page-padding: 1rem;
+      --margin-x: 1rem;
+      --h2-font-size: 2rem;
     }
   }
 
   @media (min-width: 768px) {
     :root {
       --page-padding: 1.5rem;
+      --margin-y: 2.25rem;
+      --margin-x: 1.5rem;
+      --h2-font-size: 2.375rem;
     }
   }
 
   @media (min-width: 1024px) {
     :root {
       --page-padding: 2rem;
+      --h1-font-size: 3rem;
+      --h2-font-size: 2.5rem;
     }
   }
 
