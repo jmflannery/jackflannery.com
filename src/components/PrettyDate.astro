@@ -20,7 +20,7 @@ const formatDate = (date: Date) => {
   } else if (isThisWeek(date)) {
     return format(date, 'EEEE'); // Full day name
   } else if (differenceInDays(new Date(), date) >= 7) {
-    return format(date, 'MMMM d, yyyy'); // e.g., "June 12, 2024"
+    return format(date, 'yyyy MMMM d'); // e.g., "June 12, 2024"
   } else {
     return format(date, 'MMMM d'); // e.g., "June 12"
   }
@@ -31,14 +31,7 @@ const {date} = Astro.props as Props;
 const formattedDate = date ? formatDate(parseISO(date)) : null;
 ---
 
-{
-  formattedDate && (
-    <p>
-      <span>🌹</span>
-      <time datetime={date}>{formattedDate}</time>
-    </p>
-  )
-}
+{formattedDate && <time datetime={date}>{formattedDate}</time>}
 
 <style>
   p {
@@ -49,7 +42,7 @@ const formattedDate = date ? formatDate(parseISO(date)) : null;
   }
 
   time {
-    font-family: var(--font-sans);
+    font-family: var(--font-mono);
     font-weight: 300;
   }
 </style>

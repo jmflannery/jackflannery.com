@@ -1,0 +1,65 @@
+---
+import {marked} from 'marked';
+import PrettyDate from '@/components/PrettyDate.astro';
+const {post} = Astro.props;
+---
+
+<article>
+  <header class="max-lg">
+    <h1>{post.title}</h1>
+    <h2 class="subtitle">{post.description}</h2>
+    <div class="byline">
+      <span>
+        <span class="prefix">by</span>
+        <span>Jack Flannery</span>
+      </span>
+      <span>
+        <span>🌹</span>
+        <PrettyDate date={post.published_at} />
+      </span>
+    </div>
+  </header>
+  <div class="prose" set:html={marked.parse(post?.body)} />
+</article>
+
+<style>
+  header {
+    margin: var(--margin-y) auto;
+  }
+
+  .byline {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.25rem;
+    margin: var(--margin-x) 0;
+    text-align: center;
+    font-family: var(--font-mono);
+  }
+
+  .byline > span {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .date-wrapper {
+    display: flex;
+    gap: 0.25rem;
+    align-items: center;
+  }
+
+  .prefix {
+    font-family: var(--font-script);
+    font-size: 1.5rem;
+    color: var(--color-rose-500);
+  }
+
+  @media (min-width: 640px) {
+    .byline {
+      flex-direction: row;
+      gap: 0.5rem;
+    }
+  }
+</style>

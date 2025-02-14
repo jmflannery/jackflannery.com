@@ -1,0 +1,31 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import BlogLayout from '@/layouts/BlogLayout.astro';
+import Post from '@/components/Post.astro';
+import {fetchPosts, fetchPost} from '@/api/posts';
+
+export const getStaticPaths = async () => {
+  try {
+    const posts = await fetchPosts();
+    return posts.map((post: any) => ({
+      params: {
+        slug: post.slug,
+      },
+    }));
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+};
+
+const {slug} = Astro.params;
+const posts = await fetchPosts();
+const postId = posts.find((post: any) => post.slug === slug)?.id;
+const post = await fetchPost(postId);
+---
+
+<Layout>
+  <BlogLayout>
+    <Post post={post} />
+  </BlogLayout>
+</Layout>

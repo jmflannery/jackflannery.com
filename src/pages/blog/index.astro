@@ -9,8 +9,10 @@ const posts = await fetchPosts();
 
 <Layout>
   <BlogLayout>
-    <ul>
-      {posts.map((post: any) => <PostListItem post={post} />)}
-    </ul>
+    <div class="max-md mx-auto">
+      <ul>
+        {posts.map((post: any) => <PostListItem post={post} />)}
+      </ul>
+    </div>
   </BlogLayout>
 </Layout>

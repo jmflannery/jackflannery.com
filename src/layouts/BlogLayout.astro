@@ -2,7 +2,7 @@
 import CodeAndCoffee from '@/assets/code-and-coffee.svg';
 ---
 
-<header>
+<header class="max-2xl">
   <a href="/">
     <img
       src="https://jacksassets.nyc3.digitaloceanspaces.com/me_with_palm_trees.sm.webp"
@@ -16,7 +16,7 @@ import CodeAndCoffee from '@/assets/code-and-coffee.svg';
     <CodeAndCoffee />
   </a>
 </header>
-<main class="max-md">
+<main>
   <slot />
 </main>
 
@@ -30,7 +30,8 @@ import CodeAndCoffee from '@/assets/code-and-coffee.svg';
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: var(--margin-y) var(--margin-x);
+    margin: var(--margin-y) auto;
+    padding: 0 var(--margin-x);
   }
 
   header img {
