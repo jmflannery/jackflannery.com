@@ -1,4 +1,4 @@
-import RoboBlogIcon from '@/assets/robo-blog.svg';
+import CodeAndCoffeeIcon from '@/assets/code-and-coffee.svg';
 import ResumeIcon from '@/assets/resume.svg';
 import GithubIcon from '@/assets/github.svg';
 import DevIcon from '@/assets/dev.svg';
@@ -13,7 +13,7 @@ const links = [
   {
     name: 'Blog',
     href: '/blog',
-    Component: RoboBlogIcon,
+    Component: CodeAndCoffeeIcon,
   },
   {
     name: 'Resume',
