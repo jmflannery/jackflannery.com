@@ -48,6 +48,7 @@ const {bodyClasses} = Astro.props;
     --color-blue-300: #93c5fd;
     --color-blue-500: #3b82f6;
     --color-slate-400: #a8a29e;
+    --color-slate-500: #64748b;
     --color-rose-500: #f43f5e;
 
     --heading-line-height: 1.2;
@@ -143,6 +144,11 @@ const {bodyClasses} = Astro.props;
     line-height: 1.6;
   }
 
+  a {
+    color: var(--color-blue-500);
+    text-decoration: underline;
+  }
+
   strong {
     font-weight: bold;
   }
@@ -157,11 +163,6 @@ const {bodyClasses} = Astro.props;
 
   i {
     font-style: italic;
-  }
-
-  main {
-    padding: 0 var(--margin-x);
-    margin: var(--margin-y) auto;
   }
 
   p + p,
@@ -200,6 +201,11 @@ const {bodyClasses} = Astro.props;
     word-wrap: normal;
     padding: 0;
     border: none;
+  }
+
+  .main {
+    padding: 0 var(--margin-x);
+    margin: var(--margin-y) auto;
   }
 
   .super-heading {

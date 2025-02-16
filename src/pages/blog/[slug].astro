@@ -7,7 +7,7 @@ import {fetchPosts, fetchPost} from '@/api/posts';
 export const getStaticPaths = async () => {
   try {
     const posts = await fetchPosts();
-    return posts.map((post: any) => ({
+    return posts.map(post => ({
       params: {
         slug: post.slug,
       },
@@ -20,8 +20,17 @@ export const getStaticPaths = async () => {
 
 const {slug} = Astro.params;
 const posts = await fetchPosts();
-const postId = posts.find((post: any) => post.slug === slug)?.id;
-const post = await fetchPost(postId);
+const postListItem = posts.find(post => post.slug === slug);
+
+if (!postListItem) {
+  throw new Error('Post List Item not found');
+}
+
+const post = await fetchPost(postListItem.id);
+
+if (!post) {
+  throw new Error('Post not found');
+}
 ---
 
 <Layout>

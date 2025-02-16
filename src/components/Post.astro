@@ -1,7 +1,13 @@
 ---
+import type {Post} from '@/types';
 import {marked} from 'marked';
-import PrettyDate from '@/components/PrettyDate.astro';
-const {post} = Astro.props;
+import FormattedDate from '@/components/FormattedDate.astro';
+
+interface Props {
+  post: Post;
+}
+
+const {post} = Astro.props as Props;
 ---
 
 <article>
@@ -15,11 +21,14 @@ const {post} = Astro.props;
       </span>
       <span>
         <span>🌹</span>
-        <PrettyDate date={post.published_at} />
+        <FormattedDate
+          dateString={post.published_at}
+          formatString="yyyy MMMM d"
+        />
       </span>
     </div>
   </header>
-  <div class="prose" set:html={marked.parse(post?.body)} />
+  <div class="prose" set:html={marked.parse(post.body)} />
 </article>
 
 <style>

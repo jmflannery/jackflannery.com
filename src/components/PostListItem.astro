@@ -1,5 +1,11 @@
 ---
-import PrettyDate from '@/components/PrettyDate.astro';
+import type {Post} from '@/types';
+import FormattedDate from '@/components/FormattedDate.astro';
+
+interface Props {
+  post: Post;
+}
+
 const {post} = Astro.props;
 ---
 
@@ -10,7 +16,10 @@ const {post} = Astro.props;
       <p>{post.description}</p>
       <div class="byline">
         <span>🌹</span>
-        <PrettyDate date={post.published_at} />
+        <FormattedDate
+          dateString={post.published_at}
+          formatString="yyyy MMMM d"
+        />
       </div>
     </a>
   </article>
@@ -29,6 +38,8 @@ const {post} = Astro.props;
     display: block;
     border-radius: 0.5rem;
     padding: calc(var(--margin-y) / 2) var(--margin-x);
+    text-decoration: none;
+    color: inherit;
   }
 
   a:hover,
@@ -53,6 +64,7 @@ const {post} = Astro.props;
     justify-content: flex-start;
     align-items: center;
     gap: 0.25rem;
+    font-family: var(--font-mono);
   }
 
   @media (min-width: 640px) {

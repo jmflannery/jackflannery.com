@@ -1,0 +1,197 @@
+---
+import type {Resume} from '@/types';
+import FormattedDate from './FormattedDate.astro';
+
+interface Props {
+  resume: Resume;
+}
+
+const {resume} = Astro.props as Props;
+---
+
+<header class="main max-md">
+  <h1>{resume.name}</h1>
+  <div class="identification">
+    <span>{resume.title}</span>
+    <span class="separator">{' - '}</span>
+    <span>{resume.location}</span>
+  </div>
+  <div class="contact">
+    <a href={`mailto:${resume.email}`}>{resume.email}</a>
+    <a href="/">{resume.website}</a>
+  </div>
+</header>
+<main class="main max-md">
+  <section class="skills">
+    <header>
+      <h2>Skills and Technology</h2>
+    </header>
+    <ul>
+      {
+        resume.skills.map(skill => (
+          <li>
+            <code>{skill}</code>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+  <section>
+    <header>
+      <h2>Work Experience</h2>
+    </header>
+    {
+      resume.experience.map(work => (
+        <div class="work">
+          <div class="work-header">
+            <span>{work.title}</span>
+            <span>{`${work.company} - ${work.location}`}</span>
+            <span>
+              <FormattedDate
+                dateString={work.started_on}
+                formatString="MMM yyyy"
+              />
+              {' - '}
+              <FormattedDate
+                dateString={work.ended_on}
+                formatString="MMM yyyy"
+              />
+            </span>
+          </div>
+          <ul>
+            {work.bullets.map(bullet => (
+              <li>{bullet}</li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+  </section>
+  <section>
+    <header>
+      <h2>Education</h2>
+    </header>
+    <ul>
+      {resume.education.map(school => <li>{school}</li>)}
+    </ul>
+  </section>
+</main>
+<footer></footer>
+
+<style>
+  h1 {
+    margin: 0;
+  }
+
+  h2 {
+    font-weight: 200;
+    text-align: center;
+    color: var(--color-blue-500);
+    margin: 0;
+  }
+
+  p,
+  a,
+  span {
+    font-size: 1.125rem;
+  }
+
+  a {
+    font-family: var(--font-mono);
+  }
+
+  header > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  section {
+    margin-top: var(--paragraph-spacing);
+  }
+
+  section header {
+    border-bottom: 1px solid var(--color-slate-400);
+  }
+
+  header .separator {
+    display: none;
+  }
+
+  .skills ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    padding: 0 var(--margin-x);
+  }
+
+  .work {
+    margin-top: var(--paragraph-spacing);
+  }
+
+  .work ul {
+    list-style-position: inside;
+    padding-inline-start: var(--margin-y);
+  }
+
+  .work li {
+    list-style: disc;
+  }
+
+  .work-header {
+    display: flex;
+    flex-direction: column;
+    padding-inline-start: var(--margin-y);
+    font-weight: bold;
+  }
+
+  .work-header span:nth-child(1) {
+    order: 2;
+    color: var(--color-slate-500);
+  }
+
+  .work-header span:nth-child(2) {
+    order: 1;
+  }
+
+  .work-header span:nth-child(3) {
+    order: 3;
+  }
+
+  @media print, (min-width: 768px) {
+    header div {
+      flex-direction: row;
+      gap: 10px;
+    }
+
+    header .identification {
+      justify-content: center;
+    }
+
+    header .separator {
+      display: inline;
+    }
+
+    header .contact {
+      justify-content: space-between;
+    }
+
+    .work-header {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    .work-header span:nth-child(1) {
+      order: 1;
+      color: #000;
+    }
+
+    .work-header span:nth-child(2) {
+      order: 2;
+    }
+
+    .work-header span:nth-child(3) {
+      order: 3;
+    }
+  }
+</style>

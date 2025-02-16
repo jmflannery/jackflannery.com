@@ -1,6 +1,7 @@
+import type {Post, Profile} from '@/types';
 const BASE_URL = 'https://api.jackflannery.com';
 
-export const fetchProfile = async () => {
+export const fetchProfile = async (): Promise<Profile> => {
   try {
     const res = await fetch(BASE_URL);
 
@@ -14,13 +15,13 @@ export const fetchProfile = async () => {
     return {name: 'Name', title: 'Title', bio: 'Bio Unavailable'};
   }
 };
-export const fetchPosts = async () => {
+
+export const fetchPosts = async (): Promise<Post[]> => {
   try {
     const response = await fetch(`${BASE_URL}/posts`, {
       method: 'GET',
-      // headers: headers(admin),
-      // credentials: 'include',
     });
+
     if (!response.ok) {
       throw new Error('Failed to fetch Posts');
     }
@@ -32,16 +33,14 @@ export const fetchPosts = async () => {
   }
 };
 
-export const fetchPost = async (id: number, admin = false) => {
+export const fetchPost = async (id: number): Promise<Post | null> => {
   try {
     const res = await fetch(`${BASE_URL}/posts/${id}`, {
       method: 'GET',
-      // headers: headers(admin),
-      // credentials: 'include',
     });
 
     if (!res.ok) {
-      return null;
+      throw new Error('Failed to fetch Post');
     }
 
     return res.json();

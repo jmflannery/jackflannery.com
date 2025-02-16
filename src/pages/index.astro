@@ -9,7 +9,7 @@ const profile = await fetchProfile();
 ---
 
 <Layout bodyClasses={'coolio'}>
-  <header class="max-md">
+  <header class="main max-md">
     <div class="flex justify-center flex-grow">
       <div class="inline-block text-center text-white leading-tight">
         <h1>{profile.name}</h1>
@@ -21,7 +21,7 @@ const profile = await fetchProfile();
       class="w-auto h-auto"
     />
   </header>
-  <main class="max-md">
+  <main class="main max-md">
     <div class="links flex flex-wrap justify-center items-center">
       {
         links.map(({href, name, Component}) => (
@@ -36,7 +36,7 @@ const profile = await fetchProfile();
         ))
       }
     </div>
-    <div class="bio prose" set:html={marked.parse(profile?.bio)} />
+    <div class="bio prose" set:html={marked.parse(profile.bio)} />
     <div class="footer flex justify-center items-center">
       <SocialismIcon />
     </div>
@@ -58,8 +58,6 @@ const profile = await fetchProfile();
     flex-direction: column;
     gap: var(--margin-x);
     align-items: center;
-    padding: 0 var(--margin-x);
-    margin: var(--margin-y) auto;
   }
 
   header h1,
@@ -105,6 +103,7 @@ const profile = await fetchProfile();
     font-size: var(--link-font-size);
     color: white;
     border-radius: 14px;
+    text-decoration: none;
   }
 
   .links a:hover {

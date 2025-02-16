@@ -1,0 +1,27 @@
+---
+import {parseISO, format} from 'date-fns';
+
+interface Props {
+  dateString: string;
+  formatString?: string;
+}
+
+const {dateString, formatString = 'yyyy MMMM do'} = Astro.props as Props;
+
+const formatDate = (dateString: string, formatString: string): string => {
+  try {
+    const date = parseISO(dateString);
+    return format(date, formatString);
+  } catch (error) {
+    console.error(dateString);
+    throw new Error(
+      `Error formatting date: ${error instanceof Error ? error.message : 'Unknown error'}`
+    );
+  }
+};
+
+const formattedDate =
+  dateString === 'Present' ? dateString : formatDate(dateString, formatString);
+---
+
+<time datetime={dateString}>{formattedDate}</time>

@@ -34,13 +34,6 @@ const formattedDate = date ? formatDate(parseISO(date)) : null;
 {formattedDate && <time datetime={date}>{formattedDate}</time>}
 
 <style>
-  p {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 6px;
-  }
-
   time {
     font-family: var(--font-mono);
     font-weight: 300;
