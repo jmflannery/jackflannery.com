@@ -11,7 +11,7 @@ const {post} = Astro.props as Props;
 ---
 
 <article>
-  <header class="max-lg">
+  <header class="main max-lg">
     <h1>{post.title}</h1>
     <h2 class="subtitle">{post.description}</h2>
     <div class="byline">
@@ -28,14 +28,10 @@ const {post} = Astro.props as Props;
       </span>
     </div>
   </header>
-  <div class="prose" set:html={marked.parse(post.body)} />
+  <div class="main prose" set:html={marked.parse(post.body)} />
 </article>
 
 <style>
-  header {
-    margin: var(--margin-y) auto;
-  }
-
   .byline {
     display: flex;
     flex-direction: column;
